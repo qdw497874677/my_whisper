@@ -1,0 +1,12 @@
+FROM python:3.9
+
+RUN apt update -y && \
+    apt install ffmpeg -y
+
+COPY . /app
+WORKDIR /app
+
+RUN pip install -r requirements.txt
+
+RUN whisper audio.mp4 --model turbo
+CMD ["python", "main.py"]
