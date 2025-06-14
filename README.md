@@ -2,6 +2,14 @@
 
 A REST API service for speech-to-text transcription powered by OpenAI's Whisper model. This service provides an easy-to-use interface for audio transcription with support for multiple languages.
 
+## Quick Start with Docker
+
+```bash
+docker run -p 8100:8100 hipc/whisper-api
+```
+
+Access the API at: http://localhost:8100
+
 [中文文档](README_CN.md)
 
 ## Features

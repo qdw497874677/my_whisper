@@ -2,6 +2,14 @@
 
 基于OpenAI Whisper模型的语音转写API服务，提供简单易用的REST API接口进行音频文件的转写服务。
 
+## Docker 快速启动
+
+```bash
+docker run -p 8100:8100 hipc/whisper-api
+```
+
+访问API地址：http://localhost:8100
+
 ## 功能特点
 
 - 支持音频文件上传转写
