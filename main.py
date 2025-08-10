@@ -207,6 +207,36 @@ model = whisper.load_model("turbo")
 
 app = FastAPI(title="Whisper API", description="API for Whisper ASR", version="1.0")
 
+def format_timestamp(seconds: float) -> str:
+    """将秒数转换为SRT时间格式 (HH:MM:SS,mmm)"""
+    hours = int(seconds // 3600)
+    minutes = int((seconds % 3600) // 60)
+    seconds_remaining = seconds % 60
+    seconds_int = int(seconds_remaining)
+    milliseconds = int((seconds_remaining - seconds_int) * 1000)
+    return f"{hours:02d}:{minutes:02d}:{seconds_int:02d},{milliseconds:03d}"
+
+def generate_srt(segments: List[Dict[str, Any]]) -> str:
+    """根据segments生成SRT字幕内容"""
+    srt_lines = []
+    for i, segment in enumerate(segments, 1):
+        start_time = format_timestamp(segment["start"])
+        end_time = format_timestamp(segment["end"])
+        text = segment["text"].strip()
+        
+        srt_lines.extend([
+            str(i),
+            f"{start_time} --> {end_time}",
+            text,
+            ""  # 空行分隔
+        ])
+    
+    # 移除最后的空行
+    if srt_lines and srt_lines[-1] == "":
+        srt_lines.pop()
+        
+    return "\n".join(srt_lines)
+
 async def process_transcribe_task(task_id: str, file_path: str, language: Optional[str]):
     """异步处理转录任务"""
     try:
@@ -222,17 +252,20 @@ async def process_transcribe_task(task_id: str, file_path: str, language: Option
             )
         
         # 格式化结果
+        segments = [
+            {
+                "start": segment["start"],
+                "end": segment["end"],
+                "text": segment["text"]
+            }
+            for segment in result["segments"]
+        ]
+        
         formatted_result = {
             "text": result["text"],
             "language": result["language"],
-            "segments": [
-                {
-                    "start": segment["start"],
-                    "end": segment["end"],
-                    "text": segment["text"]
-                }
-                for segment in result["segments"]
-            ]
+            "segments": segments,
+            "srt": generate_srt(segments)  # 添加SRT字幕格式数据
         }
         
         state.update_task(task_id, "completed", result=formatted_result)

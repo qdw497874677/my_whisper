@@ -74,6 +74,8 @@ The service will start at http://localhost:8100
 ```
 - **Response Example**: Same as above
 
+This is an asynchronous endpoint. The server immediately returns a task ID while processing the transcription in the background. Use the task ID to check the transcription status.
+
 ### 3. Check Task Status
 - **Endpoint**: `GET /task/{task_id}`
 - **Response Example**:
@@ -92,11 +94,14 @@ The service will start at http://localhost:8100
                     "end": 2.5,
                     "text": "Segment text"
                 }
-            ]
+            ],
+            "srt": "1\n00:00:00,000 --> 00:00:02,500\nSegment text"
         }
     }
 }
 ```
+
+The response now includes an additional `srt` field containing the transcription in SRT subtitle format, which can be used directly for video captioning.
 
 ### 4. List All Tasks
 - **Endpoint**: `GET /tasks`
