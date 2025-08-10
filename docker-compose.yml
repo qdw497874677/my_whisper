@@ -5,6 +5,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-whisper
+      args:
+        BUILDKIT_INLINE_CACHE: 1
+      network: host
     ports:
       - "8100:8100"
     volumes:

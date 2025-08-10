@@ -140,6 +140,15 @@ The Docker Compose configuration includes:
 - Proper environment configuration
 - Automatic restart on failure (unless manually stopped)
 
+## NAS Deployment Optimization
+
+If you're deploying on a NAS device and experiencing network errors during build:
+
+1. The optimized Dockerfile uses domestic mirror sources for faster downloads
+2. Build steps are separated to reduce single-step load
+3. Docker Compose configuration includes network optimizations
+4. Consider increasing Docker resource limits on your NAS
+
 ## Important Notes
 
 1. The service uses the "turbo" model by default. Other Whisper models can be configured in the code
