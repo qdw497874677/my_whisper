@@ -110,10 +110,33 @@ python main.py
 项目提供了Dockerfile，可以直接构建Docker镜像：
 
 ```bash
-docker build -t whisper . 
+docker build -f Dockerfile-whisper -t whisper . # 先构建whisper基础镜像
 docker build -t whisper-api .
 docker run -p 8100:8100 whisper-api
 ```
+
+## Docker Compose部署
+
+为了更简单的部署和管理，您也可以使用Docker Compose：
+
+1. 确保您已安装Docker和Docker Compose
+2. 运行以下命令：
+```bash
+docker-compose up -d
+```
+
+这将构建并启动Whisper API服务，您可以通过 http://localhost:8100 访问
+
+停止服务：
+```bash
+docker-compose down
+```
+
+Docker Compose配置包括：
+- 自动GPU支持（如果可用）
+- 数据持久化卷挂载
+- 正确的环境配置
+- 失败自动重启功能（除非手动停止）
 
 ## 注意事项
 

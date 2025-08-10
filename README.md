@@ -117,6 +117,29 @@ docker build -t whisper-api .
 docker run -p 8100:8100 whisper-api
 ```
 
+## Docker Compose Deployment
+
+For easier deployment and management, you can also use Docker Compose:
+
+1. Make sure you have Docker and Docker Compose installed
+2. Run the following command:
+```bash
+docker-compose up -d
+```
+
+This will build and start the Whisper API service, which will be accessible at http://localhost:8100
+
+To stop the service:
+```bash
+docker-compose down
+```
+
+The Docker Compose configuration includes:
+- Automatic GPU support (if available)
+- Volume mounting for data persistence
+- Proper environment configuration
+- Automatic restart on failure (unless manually stopped)
+
 ## Important Notes
 
 1. The service uses the "turbo" model by default. Other Whisper models can be configured in the code
