@@ -8,7 +8,7 @@ WORKDIR /app
 
 # 复制requirements.txt并安装Python依赖
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --no-check-hashes -r requirements.txt
 
 # 复制应用代码
 COPY . .
