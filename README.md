@@ -164,10 +164,9 @@ The Gradio interface provides:
 
 If you're deploying on a NAS device and experiencing network errors during build:
 
-1. The optimized Dockerfile uses domestic mirror sources for faster downloads
-2. Build steps are separated to reduce single-step load
-3. Docker Compose configuration includes network optimizations
-4. Consider increasing Docker resource limits on your NAS
+1. Build steps are separated to reduce single-step load
+2. Docker Compose configuration includes network optimizations
+3. Consider increasing Docker resource limits on your NAS
 
 ## Important Notes
 
