@@ -4,7 +4,7 @@ services:
   whisper-api:
     build:
       context: .
-      dockerfile: Dockerfile-whisper
+      dockerfile: Dockerfile
       args:
         BUILDKIT_INLINE_CACHE: 1
       network: host

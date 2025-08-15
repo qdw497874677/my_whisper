@@ -112,7 +112,6 @@ The response now includes an additional `srt` field containing the transcription
 The project includes a Dockerfile for easy deployment:
 
 ```bash
-docker build -f Dockerfile-whisper -t whisper . # do this first
 docker build -t whisper-api .
 docker run -p 8100:8100 whisper-api
 ```
@@ -139,6 +138,27 @@ The Docker Compose configuration includes:
 - Volume mounting for data persistence
 - Proper environment configuration
 - Automatic restart on failure (unless manually stopped)
+
+## Gradio Web Interface
+
+The project also includes a Gradio web interface for easier interaction with the API:
+
+1. Install Gradio dependency:
+```bash
+pip install gradio
+```
+
+2. Start the Gradio interface:
+```bash
+python gradio_app.py
+```
+
+3. Access the interface at: http://localhost:7860
+
+The Gradio interface provides:
+- Audio file upload for transcription
+- URL-based audio transcription
+- Task status monitoring
 
 ## NAS Deployment Optimization
 

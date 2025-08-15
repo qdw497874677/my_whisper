@@ -110,7 +110,6 @@ python main.py
 项目提供了Dockerfile，可以直接构建Docker镜像：
 
 ```bash
-docker build -f Dockerfile-whisper -t whisper . # 先构建whisper基础镜像
 docker build -t whisper-api .
 docker run -p 8100:8100 whisper-api
 ```
@@ -137,6 +136,27 @@ Docker Compose配置包括：
 - 数据持久化卷挂载
 - 正确的环境配置
 - 失败自动重启功能（除非手动停止）
+
+## Gradio Web界面
+
+项目还包含一个Gradio Web界面，便于与API进行交互：
+
+1. 安装Gradio依赖：
+```bash
+pip install gradio
+```
+
+2. 启动Gradio界面：
+```bash
+python gradio_app.py
+```
+
+3. 访问界面地址：http://localhost:7860
+
+Gradio界面提供以下功能：
+- 音频文件上传转写
+- 基于URL的音频转写
+- 任务状态监控
 
 ## NAS部署优化
 
